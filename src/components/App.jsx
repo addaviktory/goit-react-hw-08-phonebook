@@ -1,7 +1,9 @@
 import { Component } from 'react';
+import { nanoid } from 'nanoid';
 import { Contacts } from './Contacts/Contacts';
 import ContactsList from './ContactsList/ContactsList';
 import ContactsFilter from './ContactsFilter/ContactsFilter';
+
 export class App extends Component {
   state = {
     contacts: [],
@@ -9,27 +11,8 @@ export class App extends Component {
   };
 
   formSubmitHandler = data => {
-    const { name, number } = data;
-    const { contacts } = this.state;
-  
-    const isDuplicateName = contacts.some(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
-    );
-    if (isDuplicateName) {
-      alert('Name is already in contacts');
-      return;
-    }
-  
-    const isDuplicateNumber = contacts.some(
-      contact => contact.number === number
-    );
-    if (isDuplicateNumber) {
-      alert('Number is already in contacts');
-      return;
-    }
-  
     this.setState(prevState => ({
-      contacts: [...prevState.contacts, { ...data }],
+      contacts: [...prevState.contacts, { ...data, id: nanoid() }],
     }));
   };
 
@@ -61,7 +44,7 @@ export class App extends Component {
     }
   }
 
-  componentDidUpdate(prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
