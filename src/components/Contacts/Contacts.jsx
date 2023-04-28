@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { Form, Label, Input, SubmitButton } from './Contacts.styled';
 
+
+
 export class Contacts extends Component {
   state = {
     name: '',
