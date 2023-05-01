@@ -15,13 +15,13 @@ export const Form = styled.form`
 `;
 
 export const Label = styled.label`
-display: flex;
-margin-bottom: 12px;
-justify-content: space-around;
-flex-direction: column;
-margin: 0 auto;
-margin-bottom: 15px;
-gap: 5px;
+  display: flex;
+  margin-bottom: 12px;
+  justify-content: space-around;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  gap: 5px;
 `;
 
 export const Input = styled.input`
@@ -31,20 +31,20 @@ export const Input = styled.input`
   background: #0f0f0f;
   border: none;
   border-radius: 5px;
-  &:placeholder{
-    margin-rigth: 15px
+  &:placeholder {
+    margin-rigth: 15px;
   }
 `;
 
 export const SubmitButton = styled.button`
-width: 30%;
-height: 36px;
-color: #fff;
-background: #000;
-border-radius: 5px;
-border: none;
-cursor: pointer;
-margin: 0 auto;
+  width: 30%;
+  height: 36px;
+  color: #fff;
+  background: #000;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin: 0 auto;
   &:hover {
     color: #fff;
     background-color: #222;
