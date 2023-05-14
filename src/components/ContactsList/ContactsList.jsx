@@ -1,19 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { Ol } from './ContactsList.styled';
 import ContactItem from 'components/ContactsCatalogue/ContactsCatalogue';
-import { ContactList } from './ContactsList.styled';
 
-function ContactsList({ contacts, onDeleteContact }) {
+const ContactsList = () => {
   return (
-    <ContactList>
-      <ContactItem contacts={contacts} onDeleteContact={onDeleteContact} />
-    </ContactList>
+    <Ol>
+      <ContactItem />
+    </Ol>
   );
-}
-
-ContactsList.propTypes = {
-  contacts: PropTypes.array.isRequired,
-  onDeleteContact: PropTypes.func.isRequired,
 };
 
 export default ContactsList;
