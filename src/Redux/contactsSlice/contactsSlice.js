@@ -8,20 +8,6 @@ export const contactsSlice = createSlice({
   initialState: { numbers: [] },
   reducers: {
     addContact(state, action) {
-      for (const contact of state.numbers) {
-        if (action.payload.name.toLowerCase() === contact.name.toLowerCase()) {
-          return Notiflix.Notify.failure(
-            `${action.payload.name} is already in contact`
-          );
-        } else if (
-          action.payload.number.toLowerCase() === contact.number.toLowerCase()
-        ) {
-          return Notiflix.Notify.failure(
-            `${action.payload.number} is already in contact`
-          );
-        }
-      }
-
       state.numbers.push({ ...action.payload, id: nanoid() });
     },
     deleteContact(state, action) {

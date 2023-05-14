@@ -1,22 +1,43 @@
 import { useState } from 'react';
-import { Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+import Notiflix from 'notiflix';
+import { Formik, ErrorMessage} from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'Redux/contactsSlice/contactsSlice';
-import { Form, Label, Input, SubmitButton } from './Contacts.styled';
+import {
+  Form,
+  Label,
+  Input,
+  SubmitButton,
+} from './Contacts.styled';
 
 function ContactForm() {
   const [name, setName] = useState('');
-  const [number, setNamber] = useState('');
+  const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
-
-  const onChange = e => {
-    e.currentTarget.name === 'name'
-      ? setName(e.currentTarget.value)
-      : setNamber(e.currentTarget.value);
-  };
+  const contacts = useSelector(state => state.contacts.numbers);
 
   const handleSubmit = (values, { resetForm }) => {
+    const isNameExists = contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+
+    const isNumberExists = contacts.some(
+      contact => contact.number === number
+    );
+
+    if (isNameExists) {
+      resetForm();
+      Notiflix.Notify.failure(`${name} is already in contact`);
+      return;
+    }
+
+    if (isNumberExists) {
+      resetForm();
+      Notiflix.Notify.failure(`${number} is already in contact`);
+      return;
+    }
+
     resetForm();
     const userObj = {
       name: name,
@@ -24,12 +45,14 @@ function ContactForm() {
     };
     dispatch(addContact(userObj));
     setName('');
-    setNamber('');
+    setNumber('');
+
+    Notiflix.Notify.success('Contact added successfully');
   };
 
   return (
     <Formik initialValues={{ name: '', number: '' }} onSubmit={handleSubmit}>
-      {({ handleSubmit, handleChange, values }) => (
+      {({ handleSubmit, handleChange, values, errors, touched }) => (
         <Form autoComplete="off" onSubmit={handleSubmit}>
           <Label>
             Name
@@ -41,10 +64,13 @@ function ContactForm() {
               required
               onChange={e => {
                 handleChange(e);
-                onChange(e);
+                setName(e.currentTarget.value);
               }}
               value={values.name}
             />
+            {errors.name && touched.name && (
+              <ErrorMessage>{errors.name}</ErrorMessage>
+            )}
           </Label>
           <Label>
             Number
@@ -56,10 +82,13 @@ function ContactForm() {
               required
               onChange={e => {
                 handleChange(e);
-                onChange(e);
+                setNumber(e.currentTarget.value);
               }}
               value={values.number}
             />
+            {errors.number && touched.number && (
+              <ErrorMessage>{errors.number}</ErrorMessage>
+            )}
           </Label>
 
           <SubmitButton type="submit">Add contact</SubmitButton>
