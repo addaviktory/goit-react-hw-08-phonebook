@@ -1,99 +1,83 @@
 import { useState } from 'react';
+import { Formik } from 'formik';
+import { useDispatch} from 'react-redux';
+import { addContact } from 'Redux/operetions';
+import { MainForm, Label, Input, Button } from './Contacts.styled';
 import Notiflix from 'notiflix';
-import { Formik, ErrorMessage} from 'formik';
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'Redux/contactsSlice/contactsSlice';
-import {
-  Form,
-  Label,
-  Input,
-  SubmitButton,
-} from './Contacts.styled';
+import axios from 'axios';
 
 function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.numbers);
 
-  const handleSubmit = (values, { resetForm }) => {
-    const isNameExists = contacts.some(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
-    );
+  const onChange = e => {
+    e.currentTarget.name === 'name'
+      ? setName(e.currentTarget.value)
+      : setNumber(e.currentTarget.value);
+  };
 
-    const isNumberExists = contacts.some(
-      contact => contact.number === number
-    );
-
-    if (isNameExists) {
-      resetForm();
-      Notiflix.Notify.failure(`${name} is already in contact`);
-      return;
-    }
-
-    if (isNumberExists) {
-      resetForm();
-      Notiflix.Notify.failure(`${number} is already in contact`);
-      return;
-    }
-
+  const handleSubmit = async (values, { resetForm }) => {
     resetForm();
     const userObj = {
       name: name,
-      number: number,
+      phone: number,
     };
+
+    const isDuplicate = await checkContactDuplicate(userObj);
+
+    if (isDuplicate) {
+      Notiflix.Notify.failure('This contact already exists.');
+      return;
+    }
+
     dispatch(addContact(userObj));
     setName('');
     setNumber('');
+  };
 
-    Notiflix.Notify.success('Contact added successfully');
+  const checkContactDuplicate = async ({ name, phone }) => {
+    try {
+      const response = await axios.get(`/contacts?name=${name}&phone=${phone}`);
+      const data = response.data;
+      return data.length > 0;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
   };
 
   return (
-    <Formik initialValues={{ name: '', number: '' }} onSubmit={handleSubmit}>
-      {({ handleSubmit, handleChange, values, errors, touched }) => (
-        <Form autoComplete="off" onSubmit={handleSubmit}>
-          <Label>
-            Name
-            <Input
-              type="text"
-              name="name"
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-              onChange={e => {
-                handleChange(e);
-                setName(e.currentTarget.value);
-              }}
-              value={values.name}
-            />
-            {errors.name && touched.name && (
-              <ErrorMessage>{errors.name}</ErrorMessage>
-            )}
-          </Label>
-          <Label>
-            Number
-            <Input
-              type="tel"
-              name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-              onChange={e => {
-                handleChange(e);
-                setNumber(e.currentTarget.value);
-              }}
-              value={values.number}
-            />
-            {errors.number && touched.number && (
-              <ErrorMessage>{errors.number}</ErrorMessage>
-            )}
-          </Label>
+    <Formik initialValues={{ name, number }} onSubmit={handleSubmit}>
+      <MainForm autoComplete="off">
+        <Label>
+          Name
+          <Input
+            type="text"
+            name="name"
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+            onChange={onChange}
+            value={name}
+          />
+        </Label>
+        <Label>
+          Number
+          <Input
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            onChange={onChange}
+            value={number}
+          />
+        </Label>
 
-          <SubmitButton type="submit">Add contact</SubmitButton>
-        </Form>
-      )}
+        <Button type="submit">Add contact</Button>
+      </MainForm>
     </Formik>
   );
 }
