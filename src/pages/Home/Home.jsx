@@ -11,8 +11,8 @@ const HomePage = () => {
 
       {isLoggedIn ? (
         <HomeTitle>
-          Greetings, thank you for registering and showing confidence in us, use
-          the contact book with pleasure =)
+          Congratulations, thank you for registering.
+          Pleasant use
         </HomeTitle>
       ) : (
         <HomeTitle>
