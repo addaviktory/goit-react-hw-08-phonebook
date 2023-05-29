@@ -25,6 +25,7 @@ export const MainForm = styled(Form)`
   padding: 10px;
   border-radius: 10px;
   width: 270px;
+  padding: 40px 0;
 
   background-color: #fffffff2;
 
@@ -55,49 +56,54 @@ export const FormTitle = styled.h2`
 `;
 
 export const Label = styled.label`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  gap: 5px;
-
-  font-size: 20px;
-  font-weight: 600;
-
-  width: 100%;
+display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 24px;
+    font-weight: 600;
+    width: 75%;
 `;
 
 export const Input = styled(Field)`
-  font-size: 18px;
-  background: #66999963;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid #000;
+border-radius: 12px;
+font-size: 18px;
+border: none;
+background: #f0eaea70;
+padding: 10px;
+box-shadow: 1px 2px 10px #837f7f;
 `;
 
 export const Button = styled.button`
-  background-color: #fff;
-  border: 1px solid #000;
-  border-radius: 8px;
-  box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
-  box-sizing: border-box;
-  color: #0f1111;
-  cursor: pointer;
-  display: inline-block;
-  font-family: 'Caveat', sans-serif;
-  font-size: 20px;
-  line-height: 29px;
-  padding: 0 10px 0 11px;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  width: 200px;
-  transition-duration: 150ms;
-  transition-property: all;
+background-color: #fff;
+border: 1px solid #000;
+border-radius: 8px;
+box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+box-sizing: border-box;
+color: #0f1111;
+cursor: pointer;
+display: inline-block;
+font-family: 'Caveat',sans-serif;
+font-size: 20px;
+line-height: 29px;
+padding: 0 10px 0 11px;
+text-align: center;
+text-decoration: none;
+user-select: none;
+width: 40%;
+padding: 10px;
+font-size: 28px;
+transition: 500ms;
+transition-duration: 500ms;
+transition-property: all;
+border: none;
+box-shadow: 3px 5px 11px black;
 
   &:hover {
-    background-color: #008296;
-    box-shadow: 0 0 10px #008296, 0 0 20px #00b2b2, 0 0 40px #008296;
     color: white;
     border: 1px solid #d5d9d9;
+    padding: 8px;
+    background-color: #474747;
+    box-shadow: 0 0 10px #313131, 0 0 10px #ffffff, 0 0 15px #2d2f2f;
   }
 `;

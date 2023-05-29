@@ -40,7 +40,6 @@ function ContactForm({ closeModal }) {
 
   return (
     <ContactsformBackdrop>
-      
       <Formik initialValues={(name, number)} onSubmit={handleSubmit}>
         <MainForm autoComplete="off">
           <CloseBox onClick={() => closeModal()} />
