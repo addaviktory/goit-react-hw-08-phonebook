@@ -6,15 +6,17 @@ export const SearchLabel = styled.label`
   gap: 10px;
   align-items: center;
   padding-bottom: 15px;
-  width: 80%;
+  width: 60%;
 `;
 
 export const SearchInput = styled.input`
-width: 200%;
-font-size: 16px;
-background: #ffffff;
-border-radius: 8px;
-height: 27px;
-border: none;
-box-shadow: 1px 2px 5px 2px rgba(0, 0, 255, .2);
+  background-color: #ffffff14;
+  width: 100%;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid white;
+  font-size: 28px;
+  color: white;
+  border-radius: 10px;
+  height: 32px;
 `;

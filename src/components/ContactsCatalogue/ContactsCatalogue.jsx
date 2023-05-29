@@ -1,34 +1,62 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'Redux/selector';
-import { deleteContact } from 'Redux/operetions';
-import { getFiltedContacts } from 'Redux/filterSlice/filterSlice';
+import PropTypes from 'prop-types';
 import { getVisibleContacts } from '../Filter';
-import { Button, Item, NameContainer, NamePrg } from './ContactsCatalogue.styled';
+import { getContacts } from 'Redux/contactsSlice/selectors';
+import { getFiltedContacts } from 'Redux/filterSlice/filterSlice';
+import { deleteContact } from 'Redux/contactsSlice/operetions';
+import {
+  Button,
+  Item,
+  NameContainer,
+  NamePrg,
+  NumberPrg,
+  ButtonContainer,
+} from './ContactsCatalogue.styled';
 
-const ContactItem = () => {
+const ContactItem = ({ selectedContact, openEditModal }) => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
 
+  const contacts = useSelector(getContacts);
   const filter = useSelector(getFiltedContacts);
 
-  return getVisibleContacts(contacts, filter).map(({ id, name, phone }) => {
+  const handleEdit = (id, name, number) => {
+    selectedContact({ id, name, number });
+    openEditModal();
+  };
+
+  return getVisibleContacts(contacts, filter).map(({ id, name, number }) => {
     return (
       <Item key={id}>
         <NameContainer>
-          <NamePrg>{name}:</NamePrg>
-          <p>{phone}</p>
+          <NamePrg>{name}</NamePrg>
+          <NumberPrg>{number}</NumberPrg>
         </NameContainer>
-        <Button
-          type="button"
-          onClick={() => {
-            dispatch(deleteContact(id));
-          }}
-        >
-          Delete
-        </Button>
+        <ButtonContainer>
+          <Button
+            type="button"
+            onClick={() => {
+              handleEdit(id, name, number);
+            }}
+          >
+            Edit
+          </Button>
+          <Button
+            type="button"
+            onClick={() => {
+              dispatch(deleteContact(id));
+            }}
+          >
+            Delete
+          </Button>
+        </ButtonContainer>
       </Item>
     );
   });
+};
+
+ContactItem.prototype = {
+  selectedContact: PropTypes.func.isRequired,
+  showEditModal: PropTypes.func.isRequired,
 };
 
 export default ContactItem;

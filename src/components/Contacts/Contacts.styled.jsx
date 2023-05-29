@@ -1,36 +1,101 @@
 import styled from '@emotion/styled';
 import { Form, Field } from 'formik';
+import { GrClose } from 'react-icons/gr';
+
+export const ContactsformBackdrop = styled.div`
+position: fixed;
+    inset: 0%;
+    background-color: rgba(44, 39, 50, 0.68);
+    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
 
 export const MainForm = styled(Form)`
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 10px;
-  border-radius: 10px;
+position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 50%;
+    height: 50%;
+`;
+
+export const CloseBox = styled(GrClose)`
+  top: 10px;
+  right: 10px;
+  width: 22px;
+  height: 22px;
+
+  position: absolute;
+  cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+  }
+`;
+
+export const FormTitle = styled.h2`
+  padding-top: 30px;
 `;
 
 export const Label = styled.label`
-  display: flex;
-  justify-content: space-between;
+display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 24px;
+    font-weight: 600;
+    width: 75%;
 `;
 
 export const Input = styled(Field)`
-font-size: 16px;
-background: #ffffff;
-border-radius: 8px;
-height: 25px;
-margin-left: 20px;
+border-radius: 12px;
+font-size: 18px;
+border: none;
+background: #f0eaea70;
+padding: 10px;
+box-shadow: 1px 2px 10px #837f7f;
 `;
 
 export const Button = styled.button`
-  transition: background-color 0.5s ease;
-  outline: none;
-  border: none;
-  height: 34px;
-  background-color: #d9d9d9;
-  border-radius: 15px;
+background-color: #fff;
+border: 1px solid #000;
+border-radius: 8px;
+box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
+box-sizing: border-box;
+color: #0f1111;
+cursor: pointer;
+display: inline-block;
+font-family: 'Caveat',sans-serif;
+font-size: 20px;
+line-height: 29px;
+padding: 0 10px 0 11px;
+text-align: center;
+text-decoration: none;
+user-select: none;
+width: 30%;
+padding: 10px;
+font-size: 28px;
+transition: 500ms;
+transition-duration: 500ms;
+transition-property: all;
+border: none;
+box-shadow: 3px 5px 11px black;
 
   &:hover {
-    background-color: #715b4b;
+    color: white;
+    border: 1px solid #d5d9d9;
+    padding: 8px;
+    background-color: #474747;
+    box-shadow: 0 0 10px #313131, 0 0 10px #ffffff, 0 0 15px #2d2f2f;
   }
 `;
