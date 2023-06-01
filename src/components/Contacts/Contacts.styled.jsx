@@ -24,6 +24,8 @@ position: relative;
     background-color: #ffffff;
     width: 330px;
     padding: 30px 0;
+    background-image: linear-gradient(172deg, #ffffff, #dcdcdc);
+    box-shadow: inset 0em 0em 20px 14px #aeaca4;
     @media screen and (min-width: 768px) {
       width: 500px;
     }

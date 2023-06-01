@@ -45,7 +45,7 @@ export const NavLinkStyled = styled(NavLink)`
         color: #ffffff;
         background-color: #474747;
         border-radius: 10px;
-        padding: 5px;
+        padding: 10px;
       }
     }
 
@@ -53,7 +53,7 @@ export const NavLinkStyled = styled(NavLink)`
         color: #ffffff;
         background-color: #474747;
         border-radius: 10px;
-        padding: 5px;
+        padding: 10px;
     }
   }
 `;
