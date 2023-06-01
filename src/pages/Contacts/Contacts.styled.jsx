@@ -8,14 +8,11 @@ export const ContactsPageContainer = styled.div`
 export const AddContactsButton = styled.button`
   position: absolute;
   top: 130px;
-  width: 20%;
+  width: auto;
   height: 50px;
-
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   background-color: #fff;
   border: 1px solid #d5d9d9;
   border-radius: 8px;
@@ -23,7 +20,6 @@ export const AddContactsButton = styled.button`
   box-sizing: border-box;
   color: #0f1111;
   cursor: pointer;
-
   font-family: 'Caveat', sans-serif;
   font-size: 20px;
   line-height: 29px;
@@ -41,6 +37,10 @@ export const AddContactsButton = styled.button`
     box-shadow: 0 0 10px #c7d5d7, 0 0 2px #c7d7d7, 0 0 40px #1f2223;
     color: white;
     padding: 26px;
+  }
+  @media screen and (min-width: 768px) {
+    gap: 15px;
+    flex-direction: row;
   }
 
 `;

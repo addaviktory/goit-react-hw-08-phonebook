@@ -22,8 +22,11 @@ position: relative;
     padding: 10px;
     border-radius: 10px;
     background-color: #ffffff;
-    width: 50%;
-    height: 50%;
+    width: 330px;
+    padding: 30px 0;
+    @media screen and (min-width: 768px) {
+      width: 500px;
+    }
 `;
 
 export const CloseBox = styled(GrClose)`
@@ -82,7 +85,6 @@ padding: 0 10px 0 11px;
 text-align: center;
 text-decoration: none;
 user-select: none;
-width: 30%;
 padding: 10px;
 font-size: 28px;
 transition: 500ms;

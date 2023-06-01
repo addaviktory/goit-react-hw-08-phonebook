@@ -14,9 +14,8 @@ export const UserMenuBox = styled.div`
 
 export const UserPrg = styled.p`
   text-align: center;
-  font-size: 24px;
+  font-size: 100%;
   color: white;
-  width: 100px;
 
   overflow: hidden;
   text-overflow: ellipsis;
