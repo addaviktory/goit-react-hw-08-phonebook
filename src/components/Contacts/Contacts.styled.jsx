@@ -14,7 +14,7 @@ position: fixed;
 `;
 
 export const MainForm = styled(Form)`
-position: relative;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,8 +24,8 @@ position: relative;
     background-color: #ffffff;
     width: 330px;
     padding: 30px 0;
-    background-image: linear-gradient(172deg, #ffffff, #dcdcdc);
-    box-shadow: inset 0em 0em 20px 14px #aeaca4;
+    background-image: linear-gradient(173deg, #c44242, #ffffff80);
+    box-shadow: inset 0em 1em 20px 1px #aeaca4;
     @media screen and (min-width: 768px) {
       width: 500px;
     }
@@ -53,7 +53,7 @@ export const FormTitle = styled.h2`
 `;
 
 export const Label = styled.label`
-display: flex;
+    display: flex;
     justify-content: space-between;
     flex-direction: column;
     gap: 5px;
@@ -76,17 +76,10 @@ background-color: #fff;
 border: 1px solid #000;
 border-radius: 8px;
 box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
-box-sizing: border-box;
 color: #0f1111;
 cursor: pointer;
-display: inline-block;
-font-family: 'Caveat',sans-serif;
 font-size: 20px;
-line-height: 29px;
 padding: 0 10px 0 11px;
-text-align: center;
-text-decoration: none;
-user-select: none;
 padding: 10px;
 font-size: 28px;
 transition: 500ms;
@@ -94,6 +87,7 @@ transition-duration: 500ms;
 transition-property: all;
 border: none;
 box-shadow: 3px 5px 11px black;
+width: 30%;
 
   &:hover {
     color: white;

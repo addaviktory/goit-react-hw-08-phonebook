@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Formik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { editContact } from 'Redux/contactsSlice/operetions';
+import { toast } from 'react-hot-toast';
 
 import {
   MainForm,
@@ -26,8 +27,37 @@ export const EditContactForm = ({ selectedContact, closeEditModal }) => {
       ? setName(e.currentTarget.value)
       : setNumber(e.currentTarget.value);
   };
-
+  const contacts = useSelector(state => state.contacts.items);
   const handleSubmit = () => {
+
+    if (number.length < 10) {
+      toast.error('The phone number must contain at least 10 characters.', {
+        style: {
+          width: '400px',
+          height: '40px',
+          borderRadius: '10px',
+          fontSize: '20px',
+        },
+      });
+      return;
+    }
+
+    const isDuplicateContact = contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase() || contact.number === number
+    );
+
+    if (isDuplicateContact) {
+      toast.error('This contact already exists.', {
+        style: {
+          width: '300px',
+          height: '40px',
+          borderRadius: '10px',
+          fontSize: '20px',
+        },
+      });
+      return;
+    }
+
     const userObj = {
       id: id,
       name: name,
@@ -52,7 +82,7 @@ export const EditContactForm = ({ selectedContact, closeEditModal }) => {
             <Input
               type="text"
               name="name"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              title="The name can only contain letters, apostrophes, dashes, and spaces. For example, Adrian, Jacob Mercer, Charles de Bats de Castelmore d'Artagnan."
               required
               onChange={onChange}
               value={name}
@@ -63,7 +93,8 @@ export const EditContactForm = ({ selectedContact, closeEditModal }) => {
             <Input
               type="tel"
               name="number"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              title="The phone number must contain digits and start with a + sign."
+              pattern="^\+[\d ()]*$"
               required
               onChange={onChange}
               value={number}

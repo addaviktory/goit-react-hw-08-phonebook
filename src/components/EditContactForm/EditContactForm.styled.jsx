@@ -15,23 +15,21 @@ export const ContactsformBackdrop = styled.div`
 `;
 
 export const MainForm = styled(Form)`
-  position: relative;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  gap: 20px;
-  padding: 10px;
-  border-radius: 10px;
-  width: 270px;
-  padding: 40px 0;
-
-  background-color: #fffffff2;
-
-  @media screen and (min-width: 768px) {
-    width: 500px;
-  }
+position: relative;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 20px;
+padding: 10px;
+border-radius: 10px;
+background-color: #ffffff;
+width: 330px;
+padding: 30px 0;
+background-image: linear-gradient(173deg, #c44242, #ffffff80);
+box-shadow: inset 0em 1em 20px 1px #aeaca4;
+@media screen and (min-width: 768px) {
+  width: 500px;
+}
 `;
 
 export const CloseBox = styled(GrClose)`
@@ -57,12 +55,12 @@ export const FormTitle = styled.h2`
 
 export const Label = styled.label`
 display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    gap: 5px;
-    font-size: 24px;
-    font-weight: 600;
-    width: 75%;
+justify-content: space-between;
+flex-direction: column;
+gap: 5px;
+font-size: 24px;
+font-weight: 600;
+width: 75%;
 `;
 
 export const Input = styled(Field)`
@@ -79,25 +77,19 @@ background-color: #fff;
 border: 1px solid #000;
 border-radius: 8px;
 box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
-box-sizing: border-box;
-color: #0f1111;
 cursor: pointer;
-display: inline-block;
-font-family: 'Caveat',sans-serif;
 font-size: 20px;
-line-height: 29px;
 padding: 0 10px 0 11px;
-text-align: center;
-text-decoration: none;
-user-select: none;
-width: 40%;
 padding: 10px;
-font-size: 28px;
+font-size: 24px;
 transition: 500ms;
 transition-duration: 500ms;
 transition-property: all;
 border: none;
 box-shadow: 3px 5px 11px black;
+width: 50%;
+font-weight: bolder;
+color: #6d3e3e;
 
   &:hover {
     color: white;

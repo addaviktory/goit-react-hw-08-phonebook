@@ -18,7 +18,6 @@ export const AddContactsButton = styled.button`
   border-radius: 8px;
   box-shadow: rgba(213, 217, 217, 0.5) 0 2px 5px 0;
   box-sizing: border-box;
-  color: #0f1111;
   cursor: pointer;
   font-family: 'Caveat', sans-serif;
   font-size: 20px;
@@ -31,6 +30,8 @@ export const AddContactsButton = styled.button`
   transition-property: all;
   box-shadow: 8px 4px 20px black;
   background-image: linear-gradient(167deg, #726969, #f3bdbd);
+  font-weight: bolder;
+  color: #691717;
 
   &:hover {
     background-color: #6a7576;

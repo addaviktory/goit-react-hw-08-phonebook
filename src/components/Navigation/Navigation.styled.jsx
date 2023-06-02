@@ -16,7 +16,7 @@ export const NavLinkStyled = styled(NavLink)`
   text-transform: uppercase;
   font-size: 18px;
   font-weight: 700;
-  color: black;
+  color: white;
 
   transition: all 0.5s ease;
 
@@ -35,24 +35,24 @@ export const NavLinkStyled = styled(NavLink)`
     font-size: 22px;
 
     &.active {
-      color: white;
-      background-color: #474747;
+      color: #000000c7;
+      background-color: #939393;
       border-radius: 10px;
       padding: 5px;
 
       &:hover {
-        color: #ffffff;
-        background-color: #474747;
+        color: #000000c7;
+        background-color: #939393;
         border-radius: 10px;
-        padding: 10px;
+        padding: 5px;
       }
     }
 
     &:hover {
-        color: #ffffff;
-      background-color: #474747;
-    border-radius: 10px;
-    padding: 10px;
+      color: #000000c7;
+      background-color: #939393;
+      border-radius: 10px;
+      padding: 5px;
     }
   }
 `;

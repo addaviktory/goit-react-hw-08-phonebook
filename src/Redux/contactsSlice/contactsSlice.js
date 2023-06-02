@@ -7,7 +7,7 @@ import {
   editContact,
 } from './operetions';
 
-const handlePending = state => {
+const handlePending = (state) => {
   state.isLoading = true;
 };
 
@@ -17,12 +17,12 @@ const handleRejected = (state, action) => {
 };
 
 const updateContact = (contactsArray, id, name, number) => {
-  return contactsArray.map(contact => {
+  return contactsArray.map((contact) => {
     if (contact.id === id) {
       return {
-        id,
-        name: name,
-        number: number,
+        ...contact,
+        name,
+        number,
       };
     }
     return contact;
@@ -36,10 +36,75 @@ const contactsSlice = createSlice({
     isLoading: false,
     error: null,
   },
-  reducers: {},
-  extraReducers: builder => {
+  reducers: {
+    addContact: (state, action) => {
+      const { name, number } = action.payload;
+
+      const isDuplicateContact = state.items.some(
+        (contact) =>
+          contact.name.toLowerCase() === name.toLowerCase() ||
+          contact.number === number
+      );
+
+      if (isDuplicateContact) {
+        toast.error('Такий контакт вже існує.', {
+          style: {
+            width: '300px',
+            height: '40px',
+            borderRadius: '10px',
+            fontSize: '20px',
+          },
+        });
+        return;
+      }
+
+      state.items.push(action.payload);
+      toast.success('Contact successfully added!', {
+        style: {
+          width: '300px',
+          height: '40px',
+          borderRadius: '10px',
+          fontSize: '20px',
+        },
+      });
+    },
+    editContact: (state, action) => {
+      const { name, number } = action.payload;
+
+      const isDuplicateContact = state.items.some(
+        (contact) =>
+          contact.name.toLowerCase() === name.toLowerCase() ||
+          contact.number === number
+      );
+
+      if (isDuplicateContact) {
+        toast.error('Такий контакт вже існує.', {
+          style: {
+            width: '300px',
+            height: '40px',
+            borderRadius: '10px',
+            fontSize: '20px',
+          },
+        });
+        return;
+      }
+
+      state.items.push(action.payload);
+      toast.success('Contact successfully added!', {
+        style: {
+          width: '300px',
+          height: '40px',
+          borderRadius: '10px',
+          fontSize: '20px',
+        },
+      });
+    },
+  },
+
+  
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchContacts.pending, state => {
+      .addCase(fetchContacts.pending, (state) => {
         handlePending(state);
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
@@ -50,7 +115,7 @@ const contactsSlice = createSlice({
       .addCase(fetchContacts.rejected, (state, action) => {
         handleRejected(state, action);
       })
-      .addCase(addContact.pending, state => {
+      .addCase(addContact.pending, (state) => {
         handlePending(state);
       })
       .addCase(addContact.fulfilled, (state, action) => {
@@ -77,14 +142,14 @@ const contactsSlice = createSlice({
           },
         });
       })
-      .addCase(deleteContact.pending, state => {
+      .addCase(deleteContact.pending, (state) => {
         handlePending(state);
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         const index = state.items.findIndex(
-          task => task.id === action.payload.id
+          (task) => task.id === action.payload.id
         );
         state.items.splice(index, 1);
         toast.success('Contact successfully deleted!', {
@@ -134,4 +199,5 @@ const contactsSlice = createSlice({
   },
 });
 
+export const { contactAdded } = contactsSlice.actions;
 export const contactsReducer = contactsSlice.reducer;

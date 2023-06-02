@@ -17,7 +17,7 @@ import {
 const ContactsPage = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-  const isLoading = useSelector(getLoading);
+  const isLoading = useSelector(state => getLoading(state));
 
   useEffect(() => {
     dispatch(fetchContacts());
